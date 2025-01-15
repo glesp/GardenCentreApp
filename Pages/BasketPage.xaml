@@ -1,0 +1,35 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GardenCentreApp.Pages.BasketPage">
+    <StackLayout Padding="10">
+        <!-- Page Title -->
+        <Label Text="Shopping Basket" FontSize="24" HorizontalOptions="Center" Margin="10" />
+
+        <!-- ListView to display basket items -->
+        <ListView x:Name="BasketList" SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <!-- Product Name -->
+                            <Label Text="{Binding Product.Name}" FontSize="16" VerticalOptions="Center" />
+                            <!-- Quantity -->
+                            <Label Text="x" FontSize="16" VerticalOptions="Center" Margin="5,0,0,0" />
+                            <Label Text="{Binding Quantity}" FontSize="16" VerticalOptions="Center" />
+                            <!-- Price -->
+                            <Label Text="{Binding Product.Price, StringFormat='€{0:F2}'}" FontSize="16" Margin="10,0,0,0" VerticalOptions="Center" />
+                            <!-- Remove Button -->
+                            <Button Text="Remove" Clicked="OnRemoveItemClicked" BindingContext="{Binding}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Total Price -->
+        <Label x:Name="TotalPriceLabel" FontSize="18" HorizontalOptions="Center" Margin="10" />
+
+        <!-- Checkout Button -->
+        <Button Text="Checkout" Clicked="OnCheckoutClicked" HorizontalOptions="Center" Margin="10" />
+    </StackLayout>
+</ContentPage>
