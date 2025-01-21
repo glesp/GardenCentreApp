@@ -1,12 +1,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GardenCentreApp.ViewModels"
              x:Class="GardenCentreApp.Pages.LoginPage">
-    <StackLayout Padding="20" VerticalOptions="Center">
-        <Label Text="Login or Register" FontSize="24" HorizontalOptions="Center" />
-        <Entry Placeholder="Name" x:Name="NameEntry" />
-        <Entry Placeholder="Phone Number" x:Name="PhoneEntry" Keyboard="Telephone" />
-        <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" />
-        <Button Text="Login" Clicked="OnLoginClicked" />
-        <Button Text="Register" Clicked="OnRegisterClicked" />
+
+    <ContentPage.BindingContext>
+        <vm:LoginPageViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="10" Spacing="20">
+        <Label Text="Welcome to Garden Centre App" FontSize="24" HorizontalOptions="Center" />
+        <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Telephone" />
+        <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
+
+        <Label Text="{Binding ErrorMessage}" TextColor="Red" HorizontalOptions="Center" />
+
+        <Button Text="Login" Command="{Binding LoginCommand}" />
+        <Button Text="Register" Command="{Binding RegisterCommand}" />
     </StackLayout>
 </ContentPage>

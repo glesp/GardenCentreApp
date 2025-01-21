@@ -1,35 +1,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GardenCentreApp.ViewModels"
              x:Class="GardenCentreApp.Pages.BasketPage">
+    <ContentPage.BindingContext>
+        <vm:BasketPageViewModel />
+    </ContentPage.BindingContext>
+
     <StackLayout Padding="10">
-        <!-- Page Title -->
-        <Label Text="Shopping Basket" FontSize="24" HorizontalOptions="Center" Margin="10" />
+        <Label Text="Shopping Basket" FontSize="24" HorizontalOptions="Center" />
 
-        <!-- ListView to display basket items -->
-        <ListView x:Name="BasketList" SelectionMode="None">
-            <ListView.ItemTemplate>
+        <CollectionView ItemsSource="{Binding BasketItems}">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="10">
-                            <!-- Product Name -->
-                            <Label Text="{Binding Product.Name}" FontSize="16" VerticalOptions="Center" />
-                            <!-- Quantity -->
-                            <Label Text="x" FontSize="16" VerticalOptions="Center" Margin="5,0,0,0" />
-                            <Label Text="{Binding Quantity}" FontSize="16" VerticalOptions="Center" />
-                            <!-- Price -->
-                            <Label Text="{Binding Product.Price, StringFormat='€{0:F2}'}" FontSize="16" Margin="10,0,0,0" VerticalOptions="Center" />
-                            <!-- Remove Button -->
-                            <Button Text="Remove" Clicked="OnRemoveItemClicked" BindingContext="{Binding}" />
-                        </StackLayout>
-                    </ViewCell>
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label Text="{Binding Product.Name}" FontSize="16" />
+                        <Label Text="x" FontSize="16" />
+                        <Label Text="{Binding Quantity}" FontSize="16" />
+                        <Label Text="{Binding Product.Price, StringFormat='€{0:F2}'}" FontSize="16" />
+                        <Button Text="Remove"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:BasketPageViewModel}}, Path=RemoveItemCommand}"
+                                CommandParameter="{Binding}" />
+                    </StackLayout>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-        <!-- Total Price -->
-        <Label x:Name="TotalPriceLabel" FontSize="18" HorizontalOptions="Center" Margin="10" />
+        <Label Text="{Binding TotalPrice, StringFormat='Total: €{0:F2}'}" FontSize="18" HorizontalOptions="Center" />
 
-        <!-- Checkout Button -->
-        <Button Text="Checkout" Clicked="OnCheckoutClicked" HorizontalOptions="Center" Margin="10" />
+        <Button Text="Checkout" Command="{Binding CheckoutCommand}" HorizontalOptions="Center" />
     </StackLayout>
 </ContentPage>

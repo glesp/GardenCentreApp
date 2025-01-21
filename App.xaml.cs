@@ -1,6 +1,4 @@
-﻿using GardenCentreApp.Pages;
-using GardenCentreApp.Services;
-using Microsoft.Maui.Controls;
+﻿using GardenCentreApp.Services;
 
 namespace GardenCentreApp
 {
@@ -12,7 +10,7 @@ namespace GardenCentreApp
         {
             InitializeComponent();
             Database = new DatabaseService();
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new Pages.LoginPage());
         }
     }
 }
