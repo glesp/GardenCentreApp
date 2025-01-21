@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using GardenCentreApp.Models;
+using GardenCentreApp.Pages;
 
 namespace GardenCentreApp.ViewModels
 {
@@ -46,21 +47,43 @@ namespace GardenCentreApp.ViewModels
             var userId = Preferences.Get("UserId", 0);
             var isCorporateClient = Preferences.Get("IsCorporateClient", false);
 
-            if (isCorporateClient)
-            {
-                await Application.Current.MainPage.DisplayAlert("Success", "Corporate purchase recorded. Your account will be settled at the end of the month.", "OK");
-            }
-            else
-            {
-                App.Database.ClearBasket(userId);
-                BasketItems.Clear();
-                OnPropertyChanged(nameof(TotalPrice));
+            System.Diagnostics.Debug.WriteLine($"IsCorporateClient during checkout: {isCorporateClient}");
 
-                await Application.Current.MainPage.DisplayAlert("Success", "Your purchase has been completed!", "OK");
-            }
+            try
+            {
+                if (isCorporateClient)
+                {
+                    // Navigate to Monthly Purchases Page
+                    await Application.Current.MainPage.Navigation.PushAsync(new MonthlyPurchasesPage());
+                }
+                else
+                {
+                    // Validate basket before proceeding
+                    if (BasketItems == null || !BasketItems.Any())
+                    {
+                        System.Diagnostics.Debug.WriteLine("Basket is empty during checkout.");
+                        return;
+                    }
 
-            await Application.Current.MainPage.Navigation.PopAsync();
+                    // Copy items before clearing
+                    var purchasedItems = new ObservableCollection<BasketItem>(BasketItems);
+
+                    // Clear the basket
+                    App.Database.ClearBasket(userId);
+                    BasketItems.Clear();
+                    OnPropertyChanged(nameof(TotalPrice));
+
+                    // Navigate to Thank You Page with purchased items
+                    await Application.Current.MainPage.Navigation.PushAsync(new ThankYouPage(purchasedItems));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Navigation error: {ex.Message}");
+            }
         }
+
+
 
 
     }

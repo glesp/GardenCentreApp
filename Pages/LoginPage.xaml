@@ -19,7 +19,7 @@
 
         <!-- Switch for Corporate Client -->
         <StackLayout Orientation="Horizontal" Spacing="10">
-            <Switch IsToggled="{Binding IsCorporateClient}" />
+            <Switch IsToggled="{Binding IsCorporateClient, Mode=TwoWay}" />
             <Label Text="Are you a corporate client?" VerticalOptions="Center" />
         </StackLayout>
 

@@ -1,0 +1,26 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GardenCentreApp.Pages.ThankYouPage">
+
+    <StackLayout Padding="10" Spacing="20">
+        <Label Text="Thank you for your purchase!" FontSize="24" HorizontalOptions="Center" />
+        <Label Text="Summary of Your Purchase:" FontSize="18" />
+
+        <CollectionView ItemsSource="{Binding PurchasedItems}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label Text="{Binding Product.Name}" FontSize="16" />
+                        <Label Text="{Binding Quantity}" FontSize="16" Margin="10,0,0,0" />
+                        <Label Text="{Binding Product.Price, StringFormat='€{0:F2}'}" FontSize="16" Margin="10,0,0,0" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label Text="{Binding TotalPrice, StringFormat='Total: €{0:F2}'}"
+               FontSize="18" HorizontalOptions="Center" Margin="10" />
+
+        <Button Text="Return to Products" Clicked="OnReturnToProductsClicked" />
+    </StackLayout>
+</ContentPage>

@@ -88,6 +88,8 @@ namespace GardenCentreApp.Services
             }
             else
             {
+                item.PurchaseDate = DateTime.Now; // Add timestamp
+
                 _database.Insert(item);
             }
         }

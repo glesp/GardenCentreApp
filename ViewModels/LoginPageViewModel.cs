@@ -16,6 +16,15 @@ namespace GardenCentreApp.ViewModels
 
         [ObservableProperty]
         private string errorMessage;
+        
+        [ObservableProperty]
+        private bool isCorporateClient;
+        
+        
+        partial void OnIsCorporateClientChanged(bool value)
+        {
+            System.Diagnostics.Debug.WriteLine($"IsCorporateClient changed to: {value}");
+        }
 
         public LoginPageViewModel()
         {
@@ -32,8 +41,8 @@ namespace GardenCentreApp.ViewModels
             if (user != null)
             {
                 Preferences.Set("UserId", user.Id);
-                Preferences.Set("IsCorporateClient", user.IsCorporateClient); // NEW: Store corporate flag
-
+                Preferences.Set("IsCorporateClient", IsCorporateClient); // NEW: Store corporate flag
+                System.Diagnostics.Debug.WriteLine($"Preferences saved: IsCorporateClient = {IsCorporateClient}");
                 await Application.Current.MainPage.Navigation.PushAsync(new Pages.ProductPage());
             }
             else
