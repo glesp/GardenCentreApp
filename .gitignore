@@ -1,0 +1,15 @@
+# Ignore build and generated files
+bin/
+obj/
+
+# Ignore Rider-specific files
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore other system and temporary files
+*.DS_Store
+*.log
+.vscode/
