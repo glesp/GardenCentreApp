@@ -43,22 +43,25 @@ namespace GardenCentreApp.ViewModels
         [RelayCommand]
         private async void Checkout()
         {
-            // Clear the basket in the database
-            var userId = Preferences.Get("UserId", 0); // Get the logged-in user ID
-            App.Database.ClearBasket(userId);
+            var userId = Preferences.Get("UserId", 0);
+            var isCorporateClient = Preferences.Get("IsCorporateClient", false);
 
-            // Clear the local ObservableCollection
-            BasketItems.Clear();
+            if (isCorporateClient)
+            {
+                await Application.Current.MainPage.DisplayAlert("Success", "Corporate purchase recorded. Your account will be settled at the end of the month.", "OK");
+            }
+            else
+            {
+                App.Database.ClearBasket(userId);
+                BasketItems.Clear();
+                OnPropertyChanged(nameof(TotalPrice));
 
-            // Notify the UI to update the total price
-            OnPropertyChanged(nameof(TotalPrice));
+                await Application.Current.MainPage.DisplayAlert("Success", "Your purchase has been completed!", "OK");
+            }
 
-            // Display a success message
-            await Application.Current.MainPage.DisplayAlert("Success", "Your purchase has been completed!", "OK");
-
-            // Optionally navigate to another page, e.g., ProductPage
             await Application.Current.MainPage.Navigation.PopAsync();
         }
+
 
     }
 }

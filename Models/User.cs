@@ -9,5 +9,6 @@ namespace GardenCentreApp.Models
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Password { get; set; } // Add a password field
+        public bool IsCorporateClient { get; set; }
     }
 }

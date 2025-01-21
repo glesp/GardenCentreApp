@@ -20,21 +20,23 @@ namespace GardenCentreApp.ViewModels
         }
 
         [RelayCommand]
-        private async void AddToBasket(Product product)
+        private void AddToBasket(Product product)
         {
-            if (product == null) return;
-
             var userId = Preferences.Get("UserId", 0);
+            var isCorporateClient = Preferences.Get("IsCorporateClient", false); // NEW: Get corporate flag
+
             var basketItem = new BasketItem
             {
                 UserId = userId,
                 ProductId = product.Id,
-                Quantity = 1
+                Quantity = 1,
+                IsCorporatePurchase = isCorporateClient // NEW: Mark as corporate purchase if applicable
             };
 
             App.Database.AddBasketItem(basketItem);
-            await Application.Current.MainPage.DisplayAlert("Added to Basket", $"{product.Name} has been added to your basket.", "OK");
+            Application.Current.MainPage.DisplayAlert("Added to Basket", $"{product.Name} has been added to your basket.", "OK");
         }
+
 
         [RelayCommand]
         private async void ViewBasket()

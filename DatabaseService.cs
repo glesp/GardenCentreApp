@@ -78,22 +78,25 @@ namespace GardenCentreApp.Services
         // ---------------------------
         public void AddBasketItem(BasketItem item)
         {
-            // Check if the item already exists in the user's basket
             var existingItem = _database.Table<BasketItem>()
-                .FirstOrDefault(b => b.UserId == item.UserId && b.ProductId == item.ProductId);
+                .FirstOrDefault(b => b.UserId == item.UserId && b.ProductId == item.ProductId && b.IsCorporatePurchase == item.IsCorporatePurchase);
 
             if (existingItem != null)
             {
-                // Update the quantity if the item exists
                 existingItem.Quantity += item.Quantity;
                 _database.Update(existingItem);
             }
             else
             {
-                // Add a new item if it doesn't exist
                 _database.Insert(item);
             }
         }
+        
+        public List<BasketItem> GetCorporatePurchases()
+        {
+            return _database.Table<BasketItem>().Where(b => b.IsCorporatePurchase).ToList();
+        }
+
 
         public List<BasketItem> GetBasketItems(int userId)
         {

@@ -8,12 +8,25 @@
     </ContentPage.BindingContext>
 
     <StackLayout Padding="10" Spacing="20">
+        <!-- App Title -->
         <Label Text="Welcome to Garden Centre App" FontSize="24" HorizontalOptions="Center" />
+
+        <!-- Phone Number Entry -->
         <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Telephone" />
+
+        <!-- Password Entry -->
         <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
 
+        <!-- Switch for Corporate Client -->
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Switch IsToggled="{Binding IsCorporateClient}" />
+            <Label Text="Are you a corporate client?" VerticalOptions="Center" />
+        </StackLayout>
+
+        <!-- Error Message -->
         <Label Text="{Binding ErrorMessage}" TextColor="Red" HorizontalOptions="Center" />
 
+        <!-- Buttons -->
         <Button Text="Login" Command="{Binding LoginCommand}" />
         <Button Text="Register" Command="{Binding RegisterCommand}" />
     </StackLayout>

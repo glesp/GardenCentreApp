@@ -23,7 +23,7 @@ namespace GardenCentreApp.ViewModels
             Password = string.Empty;
             ErrorMessage = string.Empty;
         }
-
+        
         [RelayCommand]
         private async void Login()
         {
@@ -31,15 +31,17 @@ namespace GardenCentreApp.ViewModels
 
             if (user != null)
             {
-                // Navigate to ProductPage if login succeeds
+                Preferences.Set("UserId", user.Id);
+                Preferences.Set("IsCorporateClient", user.IsCorporateClient); // NEW: Store corporate flag
+
                 await Application.Current.MainPage.Navigation.PushAsync(new Pages.ProductPage());
             }
             else
             {
-                // Display an error message
                 ErrorMessage = "Invalid phone number or password.";
             }
         }
+
 
         [RelayCommand]
         private async void Register()
