@@ -7,6 +7,9 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+        
+        //Initialize SQLite Batteries for cross-platform database access
+        SQLitePCL.Batteries_V2.Init();
         builder
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>

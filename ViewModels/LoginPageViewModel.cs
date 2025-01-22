@@ -55,8 +55,30 @@ namespace GardenCentreApp.ViewModels
         [RelayCommand]
         private async void Register()
         {
-            // Navigate to a RegistrationPage (not implemented yet, optional)
-            await Application.Current.MainPage.DisplayAlert("Register", "Registration functionality is not implemented yet.", "OK");
+            // Input validation
+            if (string.IsNullOrWhiteSpace(PhoneNumber) || string.IsNullOrWhiteSpace(Password))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Phone number and password are required.", "OK");
+                return;
+            }
+
+            // Create a new user
+            var user = new User
+            {
+                PhoneNumber = PhoneNumber,
+                Password = Password,
+                IsCorporateClient = IsCorporateClient
+            };
+
+            // Attempt to register the user
+            if (App.Database.RegisterUser(user))
+            {
+                await Application.Current.MainPage.DisplayAlert("Success", "Registration completed successfully.", "OK");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "A user with this phone number already exists.", "OK");
+            }
         }
     }
 }

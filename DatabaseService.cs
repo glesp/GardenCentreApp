@@ -1,4 +1,5 @@
 using SQLite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using GardenCentreApp.Models;
@@ -11,9 +12,15 @@ namespace GardenCentreApp.Services
 
         public DatabaseService()
         {
-            // Define the database path
-            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "gardencentre.db");
-
+            // Define the database path with platform-specific logic
+            string dbPath;
+#if ANDROID
+            // Use LocalApplicationData for Android
+            dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "gardencentre.db");
+#else
+            // Default path for other platforms
+            dbPath = Path.Combine(FileSystem.AppDataDirectory, "gardencentre.db");
+#endif
             // Debug the database path for troubleshooting
             System.Diagnostics.Debug.WriteLine($"Database Path: {dbPath}");
 
@@ -89,16 +96,14 @@ namespace GardenCentreApp.Services
             else
             {
                 item.PurchaseDate = DateTime.Now; // Add timestamp
-
                 _database.Insert(item);
             }
         }
-        
+
         public List<BasketItem> GetCorporatePurchases()
         {
             return _database.Table<BasketItem>().Where(b => b.IsCorporatePurchase).ToList();
         }
-
 
         public List<BasketItem> GetBasketItems(int userId)
         {
