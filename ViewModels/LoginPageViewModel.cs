@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GardenCentreApp.Models;
-using GardenCentreApp.Services;
+using GardenCentreApp;
 using Microsoft.Maui.Controls;
 
 namespace GardenCentreApp.ViewModels
@@ -20,7 +20,7 @@ namespace GardenCentreApp.ViewModels
         [ObservableProperty]
         private bool isCorporateClient;
         
-        
+        //Debugging method
         partial void OnIsCorporateClientChanged(bool value)
         {
             System.Diagnostics.Debug.WriteLine($"IsCorporateClient changed to: {value}");

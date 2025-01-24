@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using GardenCentreApp.Models;
+using Microsoft.Maui.Storage;
 
-namespace GardenCentreApp.Services
+namespace GardenCentreApp
 {
     public class DatabaseService
     {
@@ -31,6 +32,8 @@ namespace GardenCentreApp.Services
             _database.CreateTable<User>();
             _database.CreateTable<Product>();
             _database.CreateTable<BasketItem>();
+            
+            SeedProducts();
         }
 
         // ---------------------------
@@ -56,6 +59,22 @@ namespace GardenCentreApp.Services
         // ---------------------------
         // Product Management
         // ---------------------------
+        public void SeedProducts()
+        {
+            if (!_database.Table<Product>().Any())
+            {
+                var defaultProducts = new List<Product>
+                {
+                    new Product { Name = "Rose Plant", Category = "Plants", Price = 10, Image = "rose.png" },
+                    new Product { Name = "Garden Shovel", Category = "Tools", Price = 25, Image = "shovel.png" },
+                    new Product { Name = "Fertilizer", Category = "Garden Care", Price = 15, Image = "fertilizer.png" },
+                    new Product { Name = "Outdoor Lantern", Category = "Outdoor Décor", Price = 40, Image = "lantern.png" }
+                };
+
+                _database.InsertAll(defaultProducts);
+            }
+        }
+
         public void AddProduct(Product product)
         {
             // Add a new product to the database

@@ -12,11 +12,19 @@ namespace GardenCentreApp.ViewModels
         private ObservableCollection<Product> products;
 
         public ObservableCollection<BasketItem> Basket { get; private set; } = new();
-
+        
+        
         public ProductPageViewModel()
         {
-            // Access the database to load products
+            // Load all products by default
             Products = new ObservableCollection<Product>(App.Database.GetProducts());
+        }
+
+        public ProductPageViewModel(string category)
+        {
+            Products = new ObservableCollection<Product>(
+                App.Database.GetProducts().Where(p => p.Category == category)
+            );
         }
 
         [RelayCommand]

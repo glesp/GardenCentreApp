@@ -1,0 +1,24 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GardenCentreApp.ViewModels"
+             x:Class="GardenCentreApp.Pages.CategoriesPage">
+
+    <ContentPage.BindingContext>
+        <vm:CategoriesPageViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="10">
+        <CollectionView ItemsSource="{Binding Categories}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" BackgroundColor="LightGreen">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <Label Text="{Binding .}" FontSize="18" />
+                            <Button Text="View" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CategoriesPageViewModel}}, Path=NavigateToCategoryCommand}" CommandParameter="{Binding .}" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
