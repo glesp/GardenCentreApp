@@ -6,42 +6,52 @@
         <vm:ProductPageViewModel />
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout Padding="10">
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
 
-        <!-- Category Tabs -->
-        <CollectionView ItemsSource="{Binding Categories}"
-                        SelectionMode="Single"
-                        SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
-                        HorizontalScrollBarVisibility="Never"
-                        HeightRequest="50">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5" BackgroundColor="LightGray" CornerRadius="20"
-                           HasShadow="False" WidthRequest="100" HeightRequest="40">
-                        <Label Text="{Binding}" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <!-- Category Tabs -->
+            <CollectionView ItemsSource="{Binding Categories}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                            HorizontalScrollBarVisibility="Always"
+                            HeightRequest="60">
+                <CollectionView.ItemsLayout>
+                    <!-- Linear layout for horizontal scrolling -->
+                    <LinearItemsLayout Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" BackgroundColor="LightGray" CornerRadius="20"
+                               HasShadow="False" WidthRequest="120" HeightRequest="50">
+                            <Label Text="{Binding}" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <!-- Product List -->
-        <CollectionView ItemsSource="{Binding Products}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Padding="10">
-                        <Image Source="{Binding Image}" WidthRequest="100" HeightRequest="100" />
-                        <Label Text="{Binding Name}" FontSize="16" />
-                        <Label Text="{Binding Price, StringFormat='€{0:F2}'}" FontSize="14" />
-                        <Button Text="Add to Basket"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=AddToBasketCommand}"
-                                CommandParameter="{Binding}" />
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <!-- Spacer -->
+            <BoxView HeightRequest="10" />
 
-    </VerticalStackLayout>
+            <!-- Product List -->
+            <CollectionView ItemsSource="{Binding Products}">
+                <CollectionView.ItemsLayout>
+                    <!-- Use vertical layout for products -->
+                    <LinearItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Image Source="{Binding Image}" WidthRequest="100" HeightRequest="100" />
+                            <Label Text="{Binding Name}" FontSize="16" />
+                            <Label Text="{Binding Price, StringFormat='€{0:F2}'}" FontSize="14" />
+                            <Button Text="Add to Basket"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=AddToBasketCommand}"
+                                    CommandParameter="{Binding}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
