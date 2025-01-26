@@ -11,23 +11,24 @@
         <VerticalStackLayout Padding="10" Spacing="20">
 
             <!-- Category Tabs -->
-            <ScrollView Orientation="Horizontal">
-                <HorizontalStackLayout Spacing="5">
+            <ScrollView Orientation="Horizontal" HeightRequest="60" BackgroundColor="Green">
+                <HorizontalStackLayout Spacing="20" Padding="10">
                     <BindableLayout.ItemsSource>
                         <Binding Path="Categories" />
                     </BindableLayout.ItemsSource>
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Button Text="{Binding}"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=ChangeCategoryCommand}"
-                                    CommandParameter="{Binding}"
-                                    BackgroundColor="LightGray"
-                                    TextColor="Black"
-                                    FontSize="14"
-                                    Padding="5"
-                                    CornerRadius="20"
-                                    WidthRequest="100"
-                                    HeightRequest="40" />
+                            <VerticalStackLayout Spacing="5" HorizontalOptions="Center" VerticalOptions="Center" Padding="5">
+                                <Label Text="{Binding}"
+                                       FontSize="14"
+                                       TextColor="White"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=ChangeCategoryCommand}" CommandParameter="{Binding}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </VerticalStackLayout>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </HorizontalStackLayout>
