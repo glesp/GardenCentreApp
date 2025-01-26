@@ -1,52 +1,63 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:GardenCentreApp.ViewModels"
-             x:Class="GardenCentreApp.Pages.ProductPage">
+             x:Class="GardenCentreApp.Pages.ProductPage"
+             BackgroundColor="White">
     <ContentPage.BindingContext>
         <vm:ProductPageViewModel />
     </ContentPage.BindingContext>
 
     <ScrollView>
-        <VerticalStackLayout Padding="10">
+        <VerticalStackLayout Padding="10" Spacing="20">
 
             <!-- Category Tabs -->
-            <CollectionView ItemsSource="{Binding Categories}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
-                            HorizontalScrollBarVisibility="Never"
-                            HeightRequest="50">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
+            <HorizontalStackLayout Spacing="5">
+                <BindableLayout.ItemsSource>
+                    <Binding Path="Categories" />
+                </BindableLayout.ItemsSource>
+                <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10" Margin="5" BackgroundColor="LightGray" CornerRadius="20"
-                               HasShadow="False" WidthRequest="100" HeightRequest="40">
-                            <Label Text="{Binding}" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center" />
-                        </Frame>
+                        <Button Text="{Binding}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=ChangeCategoryCommand}"
+                                CommandParameter="{Binding}"
+                                BackgroundColor="LightGray"
+                                TextColor="Black"
+                                FontSize="14"
+                                Padding="5"
+                                CornerRadius="20"
+                                WidthRequest="100"
+                                HeightRequest="40" />
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
 
             <!-- Product List -->
             <CollectionView ItemsSource="{Binding Products}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="10">
+                        <StackLayout Padding="10" Spacing="10">
                             <Image Source="{Binding Image}" WidthRequest="100" HeightRequest="100" />
-                            <Label Text="{Binding Name}" FontSize="16" />
-                            <Label Text="{Binding Price, StringFormat='€{0:F2}'}" FontSize="14" />
+                            <Label Text="{Binding Name}" FontSize="16" TextColor="Black" />
+                            <Label Text="{Binding Price, StringFormat='€{0:F2}'}" FontSize="14" TextColor="Gray" />
                             <Button Text="Add to Basket"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=AddToBasketCommand}"
-                                    CommandParameter="{Binding}"
-                                    WidthRequest="200"
+                                    BackgroundColor="#007AFF"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    Padding="10"
                                     HeightRequest="50"
-                                    Margin="10" />
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=AddToBasketCommand}"
+                                    CommandParameter="{Binding}" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <Button Text="Go to Basket"
+                    BackgroundColor="#007AFF"
+                    TextColor="White"
+                    FontSize="18"
+                    HeightRequest="50"
+                    Command="{Binding GoToBasketCommand}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

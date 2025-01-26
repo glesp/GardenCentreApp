@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Linq;
 using GardenCentreApp.Models;
+using GardenCentreApp.Pages;
 
 namespace GardenCentreApp.ViewModels
 {
@@ -55,6 +56,27 @@ namespace GardenCentreApp.ViewModels
                 );
             }
         }
+        
+        [RelayCommand]
+        private void ChangeCategory(string category)
+        {
+            if (string.IsNullOrWhiteSpace(category))
+                return;
+
+            SelectedCategory = category;
+            Products = new ObservableCollection<Product>(
+                App.Database.GetProducts().Where(p => p.Category == category || category == "All")
+            );
+        }
+        
+        [RelayCommand]
+        private async Task GoToBasket()
+        {
+            var userId = Preferences.Get("UserId", 0); // Retrieve the user's ID
+            await Application.Current.MainPage.Navigation.PushAsync(new BasketPage(userId));
+        }
+
+
 
         [RelayCommand]
         private void AddToBasket(Product product)
