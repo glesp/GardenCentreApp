@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using GardenCentreApp.Models;
 using GardenCentreApp.ViewModels;
+using Microsoft.Maui.Controls;
 
 namespace GardenCentreApp.Pages;
 

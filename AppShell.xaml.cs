@@ -1,4 +1,6 @@
-﻿namespace GardenCentreApp;
+﻿using Microsoft.Maui.Controls;
+
+namespace GardenCentreApp;
 
 public partial class AppShell : Shell
 {
