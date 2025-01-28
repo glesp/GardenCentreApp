@@ -7,7 +7,7 @@
         <vm:ProductPageViewModel />
     </ContentPage.BindingContext>
 
-    <Grid RowDefinitions="Auto, *" Padding="10">
+    <Grid RowDefinitions="Auto, *, Auto" Padding="10">
         <!-- Category Carousel -->
         <CarouselView ItemsSource="{Binding Categories}" 
                       CurrentItem="{Binding SelectedCategory, Mode=TwoWay}"
@@ -15,44 +15,41 @@
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <Frame BackgroundColor="#007AFF" Padding="10" CornerRadius="15" Margin="5">
-                       <!-- AbsoluteLayout to position elements correctly -->
-                <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                    <!-- Left Arrow (Clickable) -->
-                    <Label Text="←" 
-                           FontSize="24" 
-                           TextColor="White" 
-                           VerticalOptions="Center" 
-                           AbsoluteLayout.LayoutBounds="0, 0.5, AutoSize, AutoSize" 
-                           AbsoluteLayout.LayoutFlags="PositionProportional">
-                        <!-- TapGestureRecognizer to navigate left -->
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=MoveLeftCommand}" />
-                        </Label.GestureRecognizers>
-                    </Label>
+                        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                            <!-- Left Arrow (Clickable) -->
+                            <Label Text="←" 
+                                   FontSize="24" 
+                                   TextColor="White" 
+                                   VerticalOptions="Center" 
+                                   AbsoluteLayout.LayoutBounds="0, 0.5, AutoSize, AutoSize" 
+                                   AbsoluteLayout.LayoutFlags="PositionProportional">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=MoveLeftCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
 
-                    <!-- Category Label in the center -->
-                    <Label Text="{Binding}" 
-                           FontSize="14" 
-                           TextColor="White" 
-                           HorizontalOptions="Center" 
-                           VerticalOptions="Center"
-                           AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize" 
-                           AbsoluteLayout.LayoutFlags="PositionProportional" />
+                            <!-- Category Label in the center -->
+                            <Label Text="{Binding}" 
+                                   FontSize="14" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"
+                                   AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize" 
+                                   AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-                    <!-- Right Arrow (Clickable) -->
-                    <Label Text="→" 
-                           FontSize="24" 
-                           TextColor="White" 
-                           VerticalOptions="Center" 
-                           AbsoluteLayout.LayoutBounds="1, 0.5, AutoSize, AutoSize" 
-                           AbsoluteLayout.LayoutFlags="PositionProportional">
-                        <!-- TapGestureRecognizer to navigate right -->
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=MoveRightCommand}" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                </AbsoluteLayout>
-            </Frame>
+                            <!-- Right Arrow (Clickable) -->
+                            <Label Text="→" 
+                                   FontSize="24" 
+                                   TextColor="White" 
+                                   VerticalOptions="Center" 
+                                   AbsoluteLayout.LayoutBounds="1, 0.5, AutoSize, AutoSize" 
+                                   AbsoluteLayout.LayoutFlags="PositionProportional">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=MoveRightCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </AbsoluteLayout>
+                    </Frame>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
@@ -60,25 +57,26 @@
         <!-- Products for Selected Category -->
         <CollectionView Grid.Row="1" Margin="0,10,0,0"
                         ItemsSource="{Binding Products}" 
+                        ItemsLayout="VerticalGrid, 2" 
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" Spacing="10">
-                        <Image Source="{Binding Image}" WidthRequest="100" HeightRequest="100" />
-                        <Label Text="{Binding Name}" FontSize="16" TextColor="Black" />
-                        <Label Text="{Binding Price, StringFormat='€{0:F2}'}" FontSize="14" TextColor="Gray" />
+                    <StackLayout Padding="10" Spacing="5" HorizontalOptions="FillAndExpand">
+                        <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="150" />
+                        <Label Text="{Binding Name}" FontSize="14" TextColor="Black" HorizontalTextAlignment="Center" />
+                        <Label Text="{Binding Price, StringFormat='€{0:F2}'}" FontSize="12" TextColor="Gray" HorizontalTextAlignment="Center" />
                         <Button Text="Add to Basket"
                                 BackgroundColor="#007AFF"
                                 TextColor="White"
-                                CornerRadius="10"
-                                Padding="10"
-                                HeightRequest="50"
+                                CornerRadius="8"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=AddToBasketCommand}"
                                 CommandParameter="{Binding}" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <!-- Go to Basket Button -->
         <Button Grid.Row="2" 
                 Text="Go to Basket"
                 BackgroundColor="#007AFF"
