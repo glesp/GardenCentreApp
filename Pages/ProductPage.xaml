@@ -79,5 +79,14 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Grid.Row="2" 
+                Text="Go to Basket"
+                BackgroundColor="#007AFF"
+                TextColor="White"
+                FontSize="18"
+                HeightRequest="50"
+                Command="{Binding GoToBasketCommand}"
+                VerticalOptions="End" 
+                Margin="10"/>
     </Grid>
 </ContentPage>
