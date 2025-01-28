@@ -10,7 +10,7 @@ namespace GardenCentreApp
         {
             InitializeComponent();
             Database = new DatabaseService();
-            MainPage = new NavigationPage(new Pages.LoginPage());
+            MainPage = new AppShell(); // Set AppShell as the main page
         }
     }
 }

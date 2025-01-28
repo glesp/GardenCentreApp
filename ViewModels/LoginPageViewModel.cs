@@ -34,16 +34,19 @@ namespace GardenCentreApp.ViewModels
         }
         
         [RelayCommand]
-        private async void Login()
+        private async Task Login()
         {
             var user = App.Database.AuthenticateUser(PhoneNumber, Password);
 
             if (user != null)
             {
+                // Save preferences
                 Preferences.Set("UserId", user.Id);
-                Preferences.Set("IsCorporateClient", IsCorporateClient); // NEW: Store corporate flag
+                Preferences.Set("IsCorporateClient", IsCorporateClient); 
                 System.Diagnostics.Debug.WriteLine($"Preferences saved: IsCorporateClient = {IsCorporateClient}");
-                await Application.Current.MainPage.Navigation.PushAsync(new Pages.ProductPage());
+
+                // Navigate using Shell
+                await Shell.Current.GoToAsync("//Products"); // Navigate to ProductPage
             }
             else
             {
