@@ -4,11 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using GardenCentreApp.Models;
 using GardenCentreApp.Pages;
+using GardenCentreApp.Services;
 
 namespace GardenCentreApp.ViewModels
 {
     public partial class ProductPageViewModel : ObservableObject
     {
+        private readonly LogoutService _logoutService;
+        
         [ObservableProperty]
         private ObservableCollection<Product> products;
 
@@ -19,7 +22,8 @@ namespace GardenCentreApp.ViewModels
         private string selectedCategory;
 
         public ProductPageViewModel()
-        {
+        {   
+            _logoutService = new LogoutService();
             // Initialize categories
             Categories = new ObservableCollection<string>
             {
@@ -31,6 +35,12 @@ namespace GardenCentreApp.ViewModels
 
             // Load all products by default
             LoadProducts("All");
+        }
+        
+        [RelayCommand]
+        private async Task Logout()
+        {
+            await _logoutService.LogoutAsync();
         }
 
         partial void OnSelectedCategoryChanged(string value)
