@@ -27,8 +27,6 @@ namespace GardenCentreApp.ViewModels
                 "Plants",
                 "Tools",
                 "Garden Care",
-                "Seeds",
-                "Fertilizers"
             };
 
             // Load all products by default
@@ -41,6 +39,42 @@ namespace GardenCentreApp.ViewModels
             {
                 LoadProducts(value);
             }
+        }
+        
+        // Navigate left (to the previous item in the carousel) with cyclic behavior
+        [RelayCommand]
+        private void MoveLeft()
+        {
+            var currentIndex = Categories.IndexOf(SelectedCategory);
+            if (currentIndex > 0)
+            {
+                // Move to previous category
+                SelectedCategory = Categories[currentIndex - 1];
+            }
+            else
+            {
+                // If we're at the first item, cycle to the last item
+                SelectedCategory = Categories.Last();
+            }
+            LoadProducts(SelectedCategory);
+        }
+
+        // Navigate right (to the next item in the carousel) with cyclic behavior
+        [RelayCommand]
+        private void MoveRight()
+        {
+            var currentIndex = Categories.IndexOf(SelectedCategory);
+            if (currentIndex < Categories.Count - 1)
+            {
+                // Move to next category
+                SelectedCategory = Categories[currentIndex + 1];
+            }
+            else
+            {
+                // If we're at the last item, cycle to the first item
+                SelectedCategory = Categories.First();
+            }
+            LoadProducts(SelectedCategory);
         }
 
         private void LoadProducts(string category)

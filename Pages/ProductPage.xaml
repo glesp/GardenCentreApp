@@ -15,8 +15,44 @@
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <Frame BackgroundColor="#007AFF" Padding="10" CornerRadius="15" Margin="5">
-                        <Label Text="{Binding}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Frame>
+                       <!-- AbsoluteLayout to position elements correctly -->
+                <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                    <!-- Left Arrow (Clickable) -->
+                    <Label Text="←" 
+                           FontSize="24" 
+                           TextColor="White" 
+                           VerticalOptions="Center" 
+                           AbsoluteLayout.LayoutBounds="0, 0.5, AutoSize, AutoSize" 
+                           AbsoluteLayout.LayoutFlags="PositionProportional">
+                        <!-- TapGestureRecognizer to navigate left -->
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=MoveLeftCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!-- Category Label in the center -->
+                    <Label Text="{Binding}" 
+                           FontSize="14" 
+                           TextColor="White" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize" 
+                           AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+                    <!-- Right Arrow (Clickable) -->
+                    <Label Text="→" 
+                           FontSize="24" 
+                           TextColor="White" 
+                           VerticalOptions="Center" 
+                           AbsoluteLayout.LayoutBounds="1, 0.5, AutoSize, AutoSize" 
+                           AbsoluteLayout.LayoutFlags="PositionProportional">
+                        <!-- TapGestureRecognizer to navigate right -->
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=MoveRightCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </AbsoluteLayout>
+            </Frame>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
