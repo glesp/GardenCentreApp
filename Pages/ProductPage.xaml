@@ -16,7 +16,7 @@
                 <DataTemplate>
                     <Frame BackgroundColor="#007AFF" Padding="10" CornerRadius="15" Margin="5">
                         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                            <!-- Left Arrow (Clickable) -->
+                            <!-- Left Arrow -->
                             <Label Text="←" 
                                    FontSize="24" 
                                    TextColor="White" 
@@ -28,7 +28,7 @@
                                 </Label.GestureRecognizers>
                             </Label>
 
-                            <!-- Category Label in the center -->
+                            <!-- Category Label -->
                             <Label Text="{Binding}" 
                                    FontSize="14" 
                                    TextColor="White" 
@@ -37,7 +37,7 @@
                                    AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize" 
                                    AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-                            <!-- Right Arrow (Clickable) -->
+                            <!-- Right Arrow -->
                             <Label Text="→" 
                                    FontSize="24" 
                                    TextColor="White" 
@@ -65,6 +65,27 @@
                         <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="150" />
                         <Label Text="{Binding Name}" FontSize="14" TextColor="Black" HorizontalTextAlignment="Center" />
                         <Label Text="{Binding Price, StringFormat='€{0:F2}'}" FontSize="12" TextColor="Gray" HorizontalTextAlignment="Center" />
+
+                        <!-- Quantity Selector -->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center" Spacing="5">
+                            <Button Text="-" 
+                                    BackgroundColor="#007AFF" 
+                                    TextColor="White" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=DecreaseQuantityCommand}"
+                                    CommandParameter="{Binding}" />
+                            <Label Text="{Binding Quantity}" 
+                                   FontSize="14" 
+                                   TextColor="Black" 
+                                   HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center" />
+                            <Button Text="+" 
+                                    BackgroundColor="#007AFF" 
+                                    TextColor="White" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductPageViewModel}}, Path=IncreaseQuantityCommand}"
+                                    CommandParameter="{Binding}" />
+                        </StackLayout>
+
+                        <!-- Add to Basket Button -->
                         <Button Text="Add to Basket"
                                 BackgroundColor="#007AFF"
                                 TextColor="White"
@@ -75,16 +96,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <!-- ~1~ Go to Basket Button @1@ -->
-        <!-- <Button Grid.Row="2"  -->
-        <!--         Text="Go to Basket" -->
-        <!--         BackgroundColor="#007AFF" -->
-        <!--         TextColor="White" -->
-        <!--         FontSize="18" -->
-        <!--         HeightRequest="50" -->
-        <!--         Command="{Binding GoToBasketCommand}" -->
-        <!--         VerticalOptions="End"  -->
-        <!--         Margin="10"/> -->
     </Grid>
 </ContentPage>

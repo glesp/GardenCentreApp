@@ -22,10 +22,17 @@
 
                             <!-- Product Details -->
                             <StackLayout Grid.Column="1" Padding="10,0" VerticalOptions="Center">
+                                <!-- Product Name -->
                                 <Label Text="{Binding Product.Name}" FontSize="16" FontAttributes="Bold" />
-                                <Label Text="Quantity: {Binding Quantity}" FontSize="14" TextColor="Gray" />
+    
+                                <!-- Basket Quantity -->
+                                <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" FontSize="14" TextColor="Gray" />
+    
+                                <!-- Product Price -->
                                 <Label Text="{Binding Product.Price, StringFormat='€{0:F2}'}" FontSize="14" TextColor="#007AFF" />
                             </StackLayout>
+
+
 
                             <!-- Remove Button -->
                             <Button Text="Remove"

@@ -104,20 +104,31 @@ namespace GardenCentreApp
         // ---------------------------
         public void AddBasketItem(BasketItem item)
         {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item), "Basket item cannot be null.");
+
+            if (item.Quantity <= 0)
+                throw new ArgumentException("Quantity must be greater than zero.", nameof(item.Quantity));
+
+            // Check if the item already exists in the basket for the same user and product
             var existingItem = _database.Table<BasketItem>()
                 .FirstOrDefault(b => b.UserId == item.UserId && b.ProductId == item.ProductId && b.IsCorporatePurchase == item.IsCorporatePurchase);
 
             if (existingItem != null)
             {
+                // If the item already exists, update the quantity and timestamp
                 existingItem.Quantity += item.Quantity;
+                existingItem.PurchaseDate = DateTime.Now; // Update the timestamp
                 _database.Update(existingItem);
             }
             else
             {
-                item.PurchaseDate = DateTime.Now; // Add timestamp
+                // If it's a new item, add it to the database
+                item.PurchaseDate = DateTime.Now; // Set the timestamp
                 _database.Insert(item);
             }
         }
+
 
         public List<BasketItem> GetCorporatePurchases()
         {

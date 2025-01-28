@@ -110,11 +110,33 @@ namespace GardenCentreApp.ViewModels
         //     await Application.Current.MainPage.Navigation.PushAsync(new BasketPage(userId));
         // }
 
+        [RelayCommand]
+        private void IncreaseQuantity(Product product)
+        {
+            if (product != null)
+            {
+                product.Quantity++;
+            }
+        }
 
+        [RelayCommand]
+        private void DecreaseQuantity(Product product)
+        {
+            if (product != null && product.Quantity > 1)
+            {
+                product.Quantity--;
+            }
+        }
 
         [RelayCommand]
         private void AddToBasket(Product product)
         {
+            if (product == null)
+            {
+                Application.Current.MainPage.DisplayAlert("Error", "No product selected.", "OK");
+                return;
+            }
+
             var userId = Preferences.Get("UserId", 0);
             var isCorporateClient = Preferences.Get("IsCorporateClient", false);
 
@@ -122,12 +144,32 @@ namespace GardenCentreApp.ViewModels
             {
                 UserId = userId,
                 ProductId = product.Id,
-                Quantity = 1,
+                Quantity = product.Quantity, // Use the selected quantity
                 IsCorporatePurchase = isCorporateClient
             };
 
-            App.Database.AddBasketItem(basketItem);
-            Application.Current.MainPage.DisplayAlert("Added to Basket", $"{product.Name} has been added to your basket.", "OK");
+            try
+            {
+                // Call the database service
+                App.Database.AddBasketItem(basketItem);
+
+
+                // Show success message
+                Application.Current.MainPage.DisplayAlert(
+                    "Added to Basket",
+                    $"{product.Quantity}x {product.Name} has been added to your basket.",
+                    "OK"
+                );
+                product.Quantity = 1; // <-- This line is added to reset the quantity
+            }
+            catch (Exception ex)
+            {
+                // Handle errors (e.g., invalid quantity)
+                Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
         }
+
+        
+
     }
 }
