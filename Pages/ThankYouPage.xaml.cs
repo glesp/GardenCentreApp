@@ -15,6 +15,6 @@ public partial class ThankYouPage : ContentPage
 
     private async void OnReturnToProductsClicked(object sender, EventArgs e)
     {
-        await Application.Current.MainPage.Navigation.PopToRootAsync(); // Navigate back to ProductPage
+        await Shell.Current.GoToAsync("//Products"); // Navigate to the ProductPage
     }
 }

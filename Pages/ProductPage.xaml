@@ -76,15 +76,15 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Go to Basket Button -->
-        <Button Grid.Row="2" 
-                Text="Go to Basket"
-                BackgroundColor="#007AFF"
-                TextColor="White"
-                FontSize="18"
-                HeightRequest="50"
-                Command="{Binding GoToBasketCommand}"
-                VerticalOptions="End" 
-                Margin="10"/>
+        <!-- ~1~ Go to Basket Button @1@ -->
+        <!-- <Button Grid.Row="2"  -->
+        <!--         Text="Go to Basket" -->
+        <!--         BackgroundColor="#007AFF" -->
+        <!--         TextColor="White" -->
+        <!--         FontSize="18" -->
+        <!--         HeightRequest="50" -->
+        <!--         Command="{Binding GoToBasketCommand}" -->
+        <!--         VerticalOptions="End"  -->
+        <!--         Margin="10"/> -->
     </Grid>
 </ContentPage>

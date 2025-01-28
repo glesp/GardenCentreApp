@@ -21,6 +21,6 @@
         <Label Text="{Binding TotalPrice, StringFormat='Total: €{0:F2}'}"
                FontSize="18" HorizontalOptions="Center" Margin="10" />
 
-        <Button Text="Return to Products" Clicked="OnReturnToProductsClicked" />
+        <!-- <Button Text="Return to Products" Clicked="OnReturnToProductsClicked" /> -->
     </StackLayout>
 </ContentPage>

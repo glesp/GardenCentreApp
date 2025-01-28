@@ -103,12 +103,12 @@ namespace GardenCentreApp.ViewModels
             );
         }
         
-        [RelayCommand]
-        private async Task GoToBasket()
-        {
-            var userId = Preferences.Get("UserId", 0); // Retrieve the user's ID
-            await Application.Current.MainPage.Navigation.PushAsync(new BasketPage(userId));
-        }
+        // [RelayCommand]
+        // private async Task GoToBasket()
+        // {
+        //     var userId = Preferences.Get("UserId", 0); // Retrieve the user's ID
+        //     await Application.Current.MainPage.Navigation.PushAsync(new BasketPage(userId));
+        // }
 
 
 
