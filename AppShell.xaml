@@ -1,22 +1,46 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:pages="clr-namespace:GardenCentreApp.Pages"
-       x:Class="GardenCentreApp.AppShell">
-
-    <!-- Login Route -->
-    <ShellContent Title="Login"
+       x:Class="GardenCentreApp.AppShell"
+       FlyoutBehavior="Flyout">
+    
+    <!-- Define LoginPage Route -->
+    <ShellContent FlyoutItemIsVisible="false"
+                  Title="Login"
                   Route="LoginPage"
                   ContentTemplate="{DataTemplate pages:LoginPage}" />
 
-    <!-- Bottom Tab Navigation for ProductPage and BasketPage -->
-    <TabBar>
-        <ShellContent Title="Products"
+    <!-- Flyout Menu for Product Categories -->
+    <FlyoutItem Title="Product Categories" FlyoutDisplayOptions="AsMultipleItems">
+        <!-- All Products -->
+        <ShellContent Shell.TabBarIsVisible="false"
+                      Title="All Products"
                       Route="Products"
                       Icon="products.png"
                       ContentTemplate="{DataTemplate pages:ProductPage}" />
-        <ShellContent Title="Basket"
+        <ShellContent Shell.TabBarIsVisible="false"
+                      Title="Plants"
+                      Route="Plants"
+                      Icon="plants.png"
+                      ContentTemplate="{DataTemplate pages:ProductPage}" />
+        <ShellContent Shell.TabBarIsVisible="false"
+                      Title="Tools"
+                      Route="Tools"
+                      Icon="tools.png"
+                      ContentTemplate="{DataTemplate pages:ProductPage}" />
+        <ShellContent Shell.TabBarIsVisible="false"
+                      Title="Garden Care"
+                      Route="GardenCare"
+                      Icon="gardencare.png"
+                      ContentTemplate="{DataTemplate pages:ProductPage}" />
+        <ShellContent Shell.TabBarIsVisible="false"
+                      Title="Basket"
                       Icon="basket.png"
                       ContentTemplate="{DataTemplate pages:BasketPage}" />
-    </TabBar>
+    </FlyoutItem>
+
+    <!-- Logout as a standalone MenuItem -->
+    <MenuItem Text="Logout"
+              IconImageSource="logout.png"
+              Clicked="OnLogoutClicked" />
 </Shell>

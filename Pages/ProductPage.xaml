@@ -95,16 +95,16 @@
             </CollectionView.ItemTemplate>
         </CollectionView> 
 
-        <!-- Logout Button -->
-        <Button Grid.Row="4"
-                Text="Logout"
-                BackgroundColor="Red"
-                TextColor="White"
-                Command="{Binding LogoutCommand}"
-                HorizontalOptions="End"
-                VerticalOptions="Center"
-                CornerRadius="15"
-                FontSize="14"
-                Padding="10" />
+        <!-- ~1~ Logout Button @1@ -->
+        <!-- <Button Grid.Row="4" -->
+        <!--         Text="Logout" -->
+        <!--         BackgroundColor="Red" -->
+        <!--         TextColor="White" -->
+        <!--         Command="{Binding LogoutCommand}" -->
+        <!--         HorizontalOptions="End" -->
+        <!--         VerticalOptions="Center" -->
+        <!--         CornerRadius="15" -->
+        <!--         FontSize="14" -->
+        <!--         Padding="10" /> -->
     </Grid>
 </ContentPage>

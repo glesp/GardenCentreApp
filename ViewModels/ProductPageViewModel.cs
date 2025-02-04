@@ -128,6 +128,15 @@ namespace GardenCentreApp.ViewModels
                 product.Quantity++;
             }
         }
+        
+        public void UpdateCategoryFromRoute(string route)
+        {
+            string category = route.Contains("Plants") ? "Plants" :
+                route.Contains("Tools") ? "Tools" :
+                route.Contains("GardenCare") ? "Garden Care" : "All";
+
+            SelectedCategory = category; // This triggers `OnSelectedCategoryChanged`
+        }
 
         [RelayCommand]
         private void DecreaseQuantity(Product product)

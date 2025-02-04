@@ -7,6 +7,7 @@ namespace GardenCentreApp.Pages
         public LoginPage()
         {
             InitializeComponent();
+            Shell.SetFlyoutBehavior(this, FlyoutBehavior.Disabled);
         }
     }
 }
