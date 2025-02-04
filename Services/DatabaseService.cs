@@ -1,11 +1,7 @@
-using SQLite;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using GardenCentreApp.Models;
-using Microsoft.Maui.Storage;
+using SQLite;
 
-namespace GardenCentreApp
+namespace GardenCentreApp.Services
 {
     public class DatabaseService
     {
