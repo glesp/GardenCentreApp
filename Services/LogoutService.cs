@@ -13,7 +13,7 @@ namespace GardenCentreApp.Services
             Preferences.Remove("IsCorporateClient");
 
             // Navigate back to the LoginPage
-            await Shell.Current.GoToAsync("//Login"); // Reset navigation stack and go to LoginPage
+            await Shell.Current.GoToAsync("//LoginPage"); // Reset navigation stack and go to LoginPage
         }
     }
 }

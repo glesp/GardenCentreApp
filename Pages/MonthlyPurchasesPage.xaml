@@ -21,5 +21,12 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <!-- Logout Button -->
+        <Button Text="Logout"
+                Command="{Binding LogoutCommand}"
+                BackgroundColor="Red"
+                TextColor="White"
+                HorizontalOptions="Center"
+                Padding="10"/>
     </StackLayout>
 </ContentPage>
