@@ -13,6 +13,9 @@ namespace GardenCentreApp.ViewModels
         private readonly LogoutService _logoutService;
         
         [ObservableProperty]
+        private string pageTitle;
+        
+        [ObservableProperty]
         private ObservableCollection<Product> products;
 
         [ObservableProperty]
@@ -32,6 +35,8 @@ namespace GardenCentreApp.ViewModels
                 "Tools",
                 "Garden Care",
             };
+            SelectedCategory = "All"; // Default category
+            PageTitle = "All Products"; // Default title
 
             // Load all products by default
             LoadProducts("All");
@@ -47,9 +52,11 @@ namespace GardenCentreApp.ViewModels
         {
             if (!string.IsNullOrEmpty(value))
             {
+                PageTitle = value == "All" ? "All Products" : $"{value}"; // Dynamically update title
                 LoadProducts(value);
             }
         }
+
         
         // Navigate left (to the previous item in the carousel) with cyclic behavior
         [RelayCommand]
@@ -137,6 +144,7 @@ namespace GardenCentreApp.ViewModels
 
             SelectedCategory = category; // This triggers `OnSelectedCategoryChanged`
         }
+
 
         [RelayCommand]
         private void DecreaseQuantity(Product product)
