@@ -64,7 +64,21 @@ namespace GardenCentreApp.Services
                     new Product { Name = "Rose Plant", Category = "Plants", Price = 10, Image = "rose.png" },
                     new Product { Name = "Garden Shovel", Category = "Tools", Price = 25, Image = "shovel.png" },
                     new Product { Name = "Fertilizer", Category = "Garden Care", Price = 15, Image = "fertilizer.png" },
-                    new Product { Name = "Outdoor Lantern", Category = "Outdoor Décor", Price = 40, Image = "lantern.png" }
+                    new Product { Name = "Lily Plant", Category = "Plants", Price = 20, Image = "lily.jpg" },
+                    new Product { Name = "Garden Hoe", Category = "Tools", Price = 30, Image = "hoe.webp" },
+                    new Product { Name = "Pesticide", Category = "Garden Care", Price = 10, Image = "pesticide.webp" },
+                    new Product { Name = "Sunflower Plant", Category = "Plants", Price = 15, Image = "sunflower.jpg" },
+                    new Product { Name = "Garden Rake", Category = "Tools", Price = 20, Image = "rake.jpg" },
+                    new Product { Name = "Weed Killer", Category = "Garden Care", Price = 10, Image = "weedkiller.jpg" },
+                    new Product { Name = "Tulip Plant", Category = "Plants", Price = 10, Image = "tulip.jpg" },
+                    new Product { Name = "Garden Shears", Category = "Tools", Price = 25, Image = "shears.jpg" },
+                    new Product { Name = "Compost", Category = "Garden Care", Price = 15, Image = "compost.jpg" },
+                    new Product { Name = "Daisy Plant", Category = "Plants", Price = 20, Image = "daisy.jpg" },
+                    new Product { Name = "Garden Fork", Category = "Tools", Price = 30, Image = "fork.png" },
+                    new Product { Name = "Mulch", Category = "Garden Care", Price = 10, Image = "mulch.jpg" },
+                    new Product { Name = "Orchid Plant", Category = "Plants", Price = 15, Image = "orchid.jpg" },
+                    new Product { Name = "Garden Trowel", Category = "Tools", Price = 20, Image = "trowel.jpg" },
+                   
                 };
 
                 _database.InsertAll(defaultProducts);
